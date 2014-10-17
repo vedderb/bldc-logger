@@ -1,0 +1,3 @@
+#!/bin/bash
+rm merged.avi
+avconv -i v_video.avi -i v_audio.wav -c:v copy -c:a mp3 merged.avi
