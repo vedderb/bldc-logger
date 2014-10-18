@@ -28,7 +28,7 @@ VideoCoder::VideoCoder(int w, int h, double fps, const char *file, QObject *pare
     cv::Size S = cv::Size(w, h);
 //    mVideoWriter.open(file, CV_FOURCC('H','2','6','4'), fps, S);
     mVideoWriter.open(file, CV_FOURCC('X','V','I','D'), fps, S);
-    //mVideoWriter.open(file, CV_FOURCC('M','J','P','G'), fps, S);
+//    mVideoWriter.open(file, CV_FOURCC('M','J','P','G'), fps, S);
 //    mVideoWriter.open(file, CV_FOURCC('I','Y','U','V'), fps, S);
 }
 
