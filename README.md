@@ -19,7 +19,7 @@ sudo apt-get install qt-sdk libqt5multimedia5 libqt5multimedia5-plugins qtmultim
 https://help.ubuntu.com/community/OpenCV
 
 3. Compile  
-qmake
+qmake  
 make
 
 4. Test it with a motor controller and a webcam connected  
