@@ -12,17 +12,17 @@ Note that even though this is a console application, an X server has to be runni
 
 Usage on ubuntu:
 ================
-1. Install dependencies:
+1. Install dependencies:  
 sudo apt-get install qt-sdk libqt5multimedia5 libqt5multimedia5-plugins qtmultimedia5-dev
 
-2. Install a recent version of opencv:
+2. Install a recent version of opencv:  
 https://help.ubuntu.com/community/OpenCV
 
-3. Compile
-qmake
+3. Compile  
+qmake  
 make
 
-4. Test it with a motor controller and a webcam connected
+4. Test it with a motor controller and a webcam connected  
 ./BLDC_Logger
 
 If it deosn't work, open logger.cpp and make sure that the correct /dev/ttyACMX port is chosen. Also, make sure that the correct camera and resolution is selected.
