@@ -117,13 +117,13 @@ void FramePlotter::run()
         const double fs = 16;
         const double box1_w = 450;
         const double box2_w = 450;
-        const double box_h = 160;
+        const double box_h = 180;
         const double plot_w = 500;
         const double plot_h = 250;
 
         const double wheel_diam = 0.084;
         const double motor_poles = 14.0;
-        const double gear_ratio = 2.0;
+        const double gear_ratio = 40.0 / 15.0;
 
 
         // Upper left info box
@@ -132,12 +132,14 @@ void FramePlotter::run()
                     "Speed           : %.1f Km/h\n"
                     "Battery current : %.2f A\n"
                     "Motor current   : %.2f A\n"
+                    "MOSFET temp     : %.2f Deg C\n"
                     "Fault code      : %s",
                     values.v_in * values.current_in,
                     values.duty_now * 100.0,
                     wheel_diam * M_PI * (values.rpm / (motor_poles / 2.0) / gear_ratio / 60.0) * 3.6,
                     values.current_in,
                     values.current_motor,
+                    values.temp_mos1,
                     data.values.fault_str.remove(0, 11).toLocal8Bit().data());
 
         painter.setOpacity(0.5);
@@ -157,12 +159,14 @@ void FramePlotter::run()
                     "Drawn energy    : %.2f Wh\n"
                     "Charged energy  : %.2f Wh\n"
                     "Distance        : %.1f m\n"
+                    "RPM             : %.1f RPM\n"
                     "Battery voltage : %.1f V",
                     values.amp_hours * 1000.0,
                     values.amp_hours_charged * 1000.0,
                     values.watt_hours,
                     values.watt_hours_charged,
                     values.tachometer_abs * wheel_diam * M_PI / gear_ratio / motor_poles / 3.0,
+                    values.rpm,
                     values.v_in);
 
         painter.setOpacity(0.5);

@@ -100,7 +100,7 @@ Logger::Logger(QObject *parent) :
 
         // Lower the volume to avoid clipping. This seems to be passed to
         // pulseaudio.
-        mAudio->setVolume(0.3);
+        mAudio->setVolume(0.1);
     }
 
     connect(mPacketInterface, SIGNAL(dataToSend(QByteArray&)),
