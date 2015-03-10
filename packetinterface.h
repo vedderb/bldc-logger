@@ -31,7 +31,9 @@ public:
         FAULT_CODE_OVER_VOLTAGE,
         FAULT_CODE_UNDER_VOLTAGE,
         FAULT_CODE_DRV8302,
-        FAULT_CODE_ABS_OVER_CURRENT
+        FAULT_CODE_ABS_OVER_CURRENT,
+        FAULT_CODE_OVER_TEMP_FET,
+        FAULT_CODE_OVER_TEMP_MOTOR
     } mc_fault_code;
 
     typedef struct {
@@ -105,16 +107,22 @@ public:
         float l_min_erpm;
         float l_max_erpm;
         float l_max_erpm_fbrake;
+        float l_max_erpm_fbrake_cc;
         float l_min_vin;
         float l_max_vin;
         bool l_slow_abs_current;
         bool l_rpm_lim_neg_torque;
+        float l_temp_fet_start;
+        float l_temp_fet_end;
+        float l_temp_motor_start;
+        float l_temp_motor_end;
         // Sensorless
         bool sl_is_sensorless;
         float sl_min_erpm;
         float sl_min_erpm_cycle_int_limit;
+        float sl_max_fullbreak_current_dir_change;
         float sl_cycle_int_limit;
-        float sl_cycle_int_limit_high_fac;
+        float sl_phase_advance_at_br;
         float sl_cycle_int_rpm_br;
         float sl_bemf_coupling_k;
         // Hall sensor
@@ -158,6 +166,19 @@ public:
         PPM_CTRL_TYPE_PID_NOREV
     } ppm_control_type;
 
+    typedef struct {
+        ppm_control_type ctrl_type;
+        float pid_max_erpm;
+        float hyst;
+        float pulse_start;
+        float pulse_width;
+        float rpm_lim_start;
+        float rpm_lim_end;
+        bool multi_esc;
+        bool tc;
+        float tc_max_diff;
+    } ppm_config;
+
     // Nunchuk control types
     typedef enum {
         CHUK_CTRL_TYPE_NONE = 0,
@@ -166,30 +187,35 @@ public:
     } chuk_control_type;
 
     typedef struct {
+        chuk_control_type ctrl_type;
+        float hyst;
+        float rpm_lim_start;
+        float rpm_lim_end;
+        float ramp_time_pos;
+        float ramp_time_neg;
+        bool multi_esc;
+        bool tc;
+        float tc_max_diff;
+    } chuk_config;
+
+    typedef struct {
         // Settings
+        quint8 controller_id;
         quint32 timeout_msec;
         float timeout_brake_current;
+        bool send_can_status;
 
         // Application to use
         app_use app_to_use;
 
         // PPM application settings
-        ppm_control_type app_ppm_ctrl_type;
-        float app_ppm_pid_max_erpm;
-        float app_ppm_hyst;
-        float app_ppm_pulse_start;
-        float app_ppm_pulse_width;
-        float app_ppm_rpm_lim_start;
-        float app_ppm_rpm_lim_end;
+        ppm_config app_ppm_conf;
 
         // UART application settings
         quint32 app_uart_baudrate;
 
-        // Nunchuk
-        chuk_control_type app_chuk_ctrl_type;
-        float app_chuk_hyst;
-        float app_chuk_rpm_lim_start;
-        float app_chuk_rpm_lim_end;
+        // Nunchuk application settings
+        chuk_config app_chuk_conf;
     } app_configuration;
 
     explicit PacketInterface(QObject *parent = 0);
