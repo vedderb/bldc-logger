@@ -104,7 +104,7 @@ void FramePlotter::run()
 
         //qDebug() << "Frames to plot:" << mNextValues.size();
 
-        PacketInterface::MC_VALUES values = data.values;
+        MC_VALUES values = data.values;
         int vidw = data.img.width();
         int vidh = data.img.height();
 
@@ -121,9 +121,10 @@ void FramePlotter::run()
         const double plot_w = 500;
         const double plot_h = 250;
 
-        const double wheel_diam = 0.084;
-        const double motor_poles = 14.0;
-        const double gear_ratio = 40.0 / 15.0;
+        const double wheel_diam = 0.096;
+        const double motor_poles = 4.0;
+//        const double gear_ratio = 40.0 / 15.0;
+        const double gear_ratio = 4.75;
 
 
         // Upper left info box

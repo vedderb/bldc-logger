@@ -32,7 +32,7 @@ class FramePlotter : public QThread
 public:
     typedef struct {
         QImage img;
-        PacketInterface::MC_VALUES values;
+        MC_VALUES values;
     } FrameData;
 
     explicit FramePlotter(QObject *parent = 0);
